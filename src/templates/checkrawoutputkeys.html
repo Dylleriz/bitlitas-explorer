@@ -1,0 +1,65 @@
+
+    <h3>Signed Output Keys Checker</h3>
+        
+
+    {{#has_error}}
+        <h4 style="color:red">Attempt failed</h4>
+        <h5>{{error_msg}}</h5>
+    {{/has_error}}
+    {{^has_error}}
+        <h5>Output keys for address: <code>{{address}}</code></h5>
+        <h5>Viewkey: <code>{{viewkey}}</code></h5>
+        {{#has_total_lit}}
+            <h4>Total: <strong>{{total_lit}}</strong> BITLITAI</h4>
+        {{/has_total_lit}}
+
+         <div class="panel panel-explorer">
+			<div class="panel-heading">
+				Output keys
+			</div>
+			<div class="panel-body">
+                 <div class="table-responsive">
+				  <table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>Output#</th>
+							<th>Public Key</th>
+							<th>Timestamp</th>
+							<th>RingCT</th>
+							{{#are_key_images_known}}
+								<th>Is Spent?</th>
+							{{/are_key_images_known}}
+							<th>Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+                    {{#output_keys}}
+                        <tr>
+                            <td>{{output_no}}</td>
+                            <td><a href="/tx/{{tx_hash}}">{{output_pub_key}}</a></td>
+                            <td>{{timestamp}}</td>
+                            <td>
+								{{#is_ringct}}Yes{{/is_ringct}}
+								{{^is_ringct}}No{{/is_ringct}}
+							</td>
+                            {{#are_key_images_known}}
+                                <td>
+									{{^is_spent}}
+                                        <span class="is-spent-true">No</span>
+                                    {{/is_spent}}
+                                    {{#is_spent}}
+                                        Yes
+                                    {{/is_spent}}
+                                </td>
+                            {{/are_key_images_known}}
+                            <td>{{{amount}}}</td>
+                        </tr>
+                    {{/output_keys}}
+					</tbody>
+                </table>
+			  </div>
+			</div>
+               
+        </div>
+
+    {{/has_error}}

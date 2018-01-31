@@ -1,0 +1,68 @@
+
+    <h3>Signed Key Images Checker</h3>
+
+    {{#has_error}}
+        <h4 style="color:red">Attempt failed</h4>
+        <h5>{{error_msg}}</h5>
+    {{/has_error}}
+    {{^has_error}}
+        <h5>Key images for address: <code>{{address}}</code></h5>
+        <h5>Viewkey: <code>{{viewkey}}</code></h5>
+        {{#has_total_lit}}
+            <h4>VIso: <strong>{{total_lit}}</strong> BITLITAI</h4>
+        {{/has_total_lit}}
+
+        <div class="panel panel-explorer">
+			<div class="panel-heading">
+				Key images
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+				  <table class="table table-hover table-striped">
+					<thead>
+						<tr>
+							<th>Key#</th>
+							<th>Key Image</th>
+							<th>Timestamp</th>
+							<th>RingCT</th>
+							<th>Amount</th>
+							<th>Is Spent?</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#key_imgs}}
+						<tr>
+							<td>{{key_no}}</td>
+							<td>
+								{{#tx_hash_found}}
+									<a href="/tx/{{tx_hash}}">{{key_image}}</a>
+								{{/tx_hash_found}}
+								{{^tx_hash_found}}
+									{{key_image}}
+								{{/tx_hash_found}}
+							</td>
+							<td>{{timestamp}}</td>
+							<td>
+								{{#is_ringct}}Yes{{/is_ringct}}
+								{{^is_ringct}}No{{/is_ringct}}
+							</td>
+							<td>{{{amount}}}</td>
+							<td>
+								{{#is_spent}}
+									<span class="is-spent-true">Yes</span>
+								{{/is_spent}}
+								{{^is_spent}}
+									No
+								{{/is_spent}}
+							</td>
+						</tr>
+						{{/key_imgs}}
+					</tbody>
+				  </table>
+				</div>
+			</div>
+        </div>
+
+    {{/has_error}}
+
+

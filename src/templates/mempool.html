@@ -1,0 +1,49 @@
+<div class="panel panel-explorer">
+	 <div class="panel-heading">
+	   Vykdomi mokėjimai <small>(txs skaičius: {{mempool_size}}, dydis: {{mempool_size_kB}} kB)</small>
+	</div>
+	 <div class="panel-body">
+		 <div class="table-responsive">
+            <table class="table table-hover table-striped">
+				<thead>
+					<th><i class="fa fa-clock-o"></i> Senumas <!--(Δm)--></th>
+					<th><i class="fa fa-paw"></i> TX hash</th>
+					<th><i class="fa fa-tag"></i> Mokestis</th>
+					<th><i class="fa fa-money"></i> Suma</th>
+					<th><i class="fa fa-exchange"></i> Į/Iš</th>
+					<th><i class="fa fa-circle-o"></i> Žiedas</th>
+					<th><i class="fa fa-sitemap"></i> Mixin</th>
+					<th><i class="fa fa-floppy-o"></i> Dydis [kB]</th>
+				</thead>
+				<tbody>
+					{{#mempooltxs}}
+					<tr>
+						<td>{{age}}</td>
+						<td><a href="/tx/{{hash}}">{{hash}}</a></td>
+						<td>{{fee}}</td>
+						<td>{{{lit_outputs}}}</td>
+						<td>{{no_inputs}}/{{no_outputs}}</td>
+						<td>
+							{{#is_ringct}}taip{{rct_type}}{{/is_ringct}}
+							{{^is_ringct}}ne{{/is_ringct}}
+						</td>
+						<td>{{mixin}}</td>
+						<td>{{txsize}}</td>
+					</tr>
+					{{/mempooltxs}}
+					{{^mempool_fits_on_front_page}}
+					  {{#partial_mempool_shown}}
+					  <tfoot>
+						<tr>
+						  <td colspan="8"><a href="/mempool">Only {{no_of_mempool_tx_of_frontpage}} txs shown. Click here to see all of them</a></td>
+						<tr>
+					  </tfoot>
+					  {{/partial_mempool_shown}}
+
+					{{/mempool_fits_on_front_page}}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>

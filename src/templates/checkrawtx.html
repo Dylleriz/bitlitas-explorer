@@ -1,0 +1,135 @@
+    
+        <br/>
+        <h3 class="center">Transaction checking</h3>    
+
+        <h5>Data file prefix: <code>{{data_prefix}}</code></h5>
+
+        {{#unsigned_tx_given}}
+            <h4>Details of unsigned raw tx data given</h4>
+            {{#txs}}
+                <div class="panel panel-explorer panel-tx">
+					<div class="panel-heading">
+						Basic information
+					</div>
+					{{#dest_infos}}
+					<div class="row">
+						<div class="col-xs-12 col-sm-3"> Send {{dest_amount}} to: </div>
+						<div class="col-xs-12 col-sm-9">{{dest_address}}</div>
+					</div>
+					{{/dest_infos}}
+					
+					
+					{{#has_payment_id}}
+					<div class="row">
+						<div class="col-xs-12 col-sm-3"> Payment id: </div>
+						<div class="col-xs-12 col-sm-9">{{payment_id}}</div>
+					</div>
+					{{/has_payment_id}}
+
+					{{#has_payment_id8}}
+					<div class="row">
+						<div class="col-xs-12 col-sm-3"> Payment id (encrypted): </div>
+						<div class="col-xs-12 col-sm-9">{{payment_id8}}</div>
+					</div>
+					{{/has_payment_id8}}
+				</div>
+					
+				<div class="panel panel-explorer">
+					<div class="panel-heading">
+					  Inputs' mixins time scale (from {{min_mix_time}} till {{max_mix_time}};
+					  resolution: {{timescales_scale}} days{{#have_raw_tx}}; R - real mixin {{/have_raw_tx}})
+					</div>
+					<div class="panel-body">
+					  <div class="table-responsive">
+						<ul class="center" style="font-family: monospace; padding:20px 10px 10px;">
+							{{#timescales}}
+							<li  style="list-style-type: none; text-align: center; font-size: 8px; height:22px">|{{timescale}}|</li>
+							{{/timescales}}
+						</ul>
+					  </div>
+					</div>
+				</div>
+				
+				
+				<div class="panel panel-explorer">
+					<div class="panel-heading">
+						Outputs selected for this tx (total: {{sum_outputs_amounts}})
+					</div>
+					
+					{{#dest_sources}}
+					<div class="panel-body">
+						<div class="table-responsive">
+						  <table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Output Index</th>
+									<th>Stealth address</th>
+									<th>Is this real output</th>
+									<th>Age {{age_format}}</th>
+									<th>Amount</th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#outputs}}
+									<tr>
+										<td>{{out_index}}</td>
+										<td><a href="/tx/{{tx_hash}}">{{out_pub_key}}</a></td>
+										{{#is_real}}
+											<td><span style="color: #008009;font-weight: bold">{{is_real}}</span></td>
+										{{/is_real}}
+										{{^is_real}}
+											<td>{{is_real}}</td>
+										{{/is_real}}
+										<td>{{output_age}}</td>
+										<td>{{output_amount}}</td>
+									</tr>
+								   <!-- <tr><td colspan="3">&nbsp;  &nbsp; ctkey: {{ctkey}}</td></tr>-->
+								{{/outputs}}
+							</tbody>
+						  </table>
+						</div>
+					</div>
+				  {{/dest_sources}}
+				</div>
+				
+				<h4>Change to be returned to the sender: {{change_amount}}</h4>
+                
+            {{/txs}}
+        {{/unsigned_tx_given}}
+
+        {{^unsigned_tx_given}}
+            <h4>Details of signed raw tx data given</h4>
+            {{#txs}}
+			<div class="panel panel-explorer panel-tx">
+               <div class="panel-heading">
+					Basic information
+				</div>
+				{{#dest_infos}}
+					<div class="row">
+						{{^is_this_change}}
+						<div class="col-xs-12 col-sm-3">Send {{dest_amount}} to: </div>
+						<div class="col-xs-12 col-sm-9">{{dest_address}}</div>
+						{{/is_this_change}}
+						{{#is_this_change}}
+						<div class="col-xs-12 col-sm-3">Total change {{dest_amount}} back to: </div>
+						<div class="col-xs-12 col-sm-9">{{dest_address}}</div>
+						{{/is_this_change}}
+					</div>
+				{{/dest_infos}}
+			</div>	
+                {{>tx_details}}
+                {{#tx_json}}
+                    <br/>
+                    <h3>JSON representation of tx</h3>
+                    <div class="center">
+                        <code style="white-space: pre-wrap; font-size: 11px">
+                            {{tx_json}}
+                        </code>
+                    </div>
+                {{/tx_json}}
+            {{/txs}}
+
+        {{/unsigned_tx_given}}
+
+
+    

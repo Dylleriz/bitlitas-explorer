@@ -1,0 +1,243 @@
+
+  <h4> Rezultatai: {{search_text}} </h4>
+  
+	{{#no_results}}
+	<div class="center" style="text-align:center; padding: 10p">
+		<p style="margin-bottom:2px">Nieko blokų grandinėje panašaus rasti nepavyko :-(</p>
+		<p style="margin:2px"><em><strong>Pastaba:</strong> galimas 1-2 min vėlavimas</em></p>
+	</div>
+	{{/no_results}}
+
+	{{#to_many_results}}
+	<div class="center" style="text-align:center">
+		<p>Rasta daugiau, kaip 500 rezultatų. Daugiau nei tiek parodyti negalime.</p>
+	</div>
+	{{/to_many_results}}
+   
+  {{^no_results}}
+  <div class="panel panel-explorer">
+	{{#has_key_images}}
+    <div class="panel-heading">
+      The search term matches key image found in the following transaction
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+			<thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#key_images}}
+                {{>tx_table_row}}
+            {{/key_images}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_key_images}}
+	
+	{{#has_tx_public_keys}}
+    <div class="panel-heading">
+     The search term matches tx public key of the following transaction
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#tx_public_keys}}
+                {{>tx_table_row}}
+            {{/tx_public_keys}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_tx_public_keys}}
+
+	{{#has_payments_id}}
+    <div class="panel-heading">
+		The search term matches payment id found in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#payments_id}}
+                {{>tx_table_row}}
+           {{/payments_id}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_payments_id}}
+
+	{{#has_encrypted_payments_id}}
+    <div class="panel-heading">
+		The search term matches encrypted payment id found in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#encrypted_payments_id}}
+                {{>tx_table_row}}
+           {{/encrypted_payments_id}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_encrypted_payments_id}}
+  
+	{{#has_encrypted_payments_id}}
+    <div class="panel-heading">
+		The search term matches encrypted payment id found in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#encrypted_payments_id}}
+                {{>tx_table_row}}
+           {{/encrypted_payments_id}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_encrypted_payments_id}}
+	
+	{{#has_output_public_keys}}
+    <div class="panel-heading">
+		The search term matches output public key found in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#output_public_keys}}
+                {{>tx_table_row}}
+           {{/output_public_keys}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_output_public_keys}}
+	
+	{{#has_output_public_keys_based_on_global_idx}}
+    <div class="panel-heading">
+		The search term matches global index of an output in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#output_public_keys_based_on_global_idx}}
+                {{>tx_table_row}}
+           {{/output_public_keys_based_on_global_idx}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_output_public_keys_based_on_global_idx}}
+	
+	{{#has_output_public_keys_based_on_amount_idx}}
+    <div class="panel-heading">
+		The search term matches global index of an output in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#output_public_keys_based_on_amount_idx}}
+                {{>tx_table_row}}
+           {{/output_public_keys_based_on_amount_idx}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_output_public_keys_based_on_amount_idx}}
+	
+	{{#has_tx_in_the_minute}}
+    <div class="panel-heading">
+		The search term matches global index of an output in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#tx_in_the_minute}}
+                {{>tx_table_row}}
+           {{/tx_in_the_minute}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_tx_in_the_minute}}
+	
+	
+	{{#has_tx_in_the_hour}}
+    <div class="panel-heading">
+		The search term matches global index of an output in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#tx_in_the_hour}}
+                {{>tx_table_row}}
+           {{/tx_in_the_hour}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_tx_in_the_hour}}
+  
+  
+	{{#has_tx_in_the_day}}
+    <div class="panel-heading">
+		The search term matches global index of an output in the following transaction(s)
+    </div>
+    <div class="panel-body">
+      <div class="table-responsive">
+          <table class="table table-hover table-striped">
+            <thead>
+				{{>tx_table_head}}
+			</thead>
+			<tbody>
+            {{#tx_in_the_day}}
+                {{>tx_table_row}}
+           {{/tx_in_the_day}}
+			</tbody>
+          </table>
+      </div>
+    </div>
+	{{/has_tx_in_the_day}}
+  </div>
+  {{/no_results}}
+
+ 
