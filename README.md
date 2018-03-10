@@ -1,1 +1,5 @@
-# Bitlito blokų naršyklė
+# Bitlitas blocks explorer
+
+=============================================================================================
+
+# Bitlitas blokų naršyklė
