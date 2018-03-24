@@ -125,45 +125,45 @@
 	{{#blk_found}}
     <div class="tx-tools">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#decode-outputs" aria-controls="decode-outputs" role="tab" data-toggle="tab">Iššifruoti pavedimus</a></li>
-          <li role="presentation"><a href="#prove-sending" aria-controls="prove-sending" role="tab" data-toggle="tab">Patvirtinti siuntimą</a></li>
+          <li role="presentation" class="active"><a href="#decode-outputs" aria-controls="decode-outputs" role="tab" data-toggle="tab">Decode outputs</a></li>
+          <li role="presentation"><a href="#prove-sending" aria-controls="prove-sending" role="tab" data-toggle="tab">Confirm transaction</a></li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="decode-outputs">
-            <h4 style="margin: 0px">Tikrinkite, kuris pavedimas priklauso Bitlitas adresui pagal adresą ir stebėjimo raktą</h4>
+            <h4 style="margin: 0px">Check which outputs belong to given BitLitas address and viewkey</h4>
 			<h5 style="margin: 0px">
-                Žiedinių transakcijų pavedimų sumos taip pat yra iššifruojamos
+                For Ring transactions, outputs amounts are also decoded
                 <br/><br/>
-                <strong>Pastaba: adresas ir stebėjimo raktas yra siunčiamas į serverį, kuriame vyksta duomenų apdorojimas</strong>
+                <strong>Note: address and viewkey are sent to the server, as the calculations are done on the server side</strong>
             </h5>
             <form action="/myoutputs" method="get" style="padding-top:20px; max-width: 900px; margin: auto; text-align: center;" autocomplete="off">
               <input type="hidden" name="tx_hash" value="{{tx_hash}}">
               <div class="form-group">
-                <input type="text" class="form-control" id="inputBitlitasAddress" placeholder="Bitlitas adresas" name="lit_address"/>
+                <input type="text" class="form-control" id="inputBitlitasAddress" placeholder="Bitlitas address" name="lit_address"/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="inputViewKey" placeholder="Privatus stebėjimo raktas" name="viewkey"/>
+                <input type="text" class="form-control" id="inputViewKey" placeholder="Private viewkey" name="viewkey"/>
 				<input type="hidden" name="raw_tx_data" value="{{raw_tx_data}}">
               </div>
-              <button type="submit" class="btn btn-explorer">Iššifruoti pavedimus</button>
+              <button type="submit" class="btn btn-explorer">Decode outputs</button>
             </form>
           </div>
           <div role="tabpanel" class="tab-pane" id="prove-sending">
-            <h4 style="margin: 0px">Patvirtinkite kam nors, kad siuntėte pavedimą šioje transakcijoje</h4>
-            <h5 style="margin: 0px">Tx privatus raktas gali būti gautas naudojant <code>get_tx_key</code>
-                komandą  <code>bitlitas-wallet-cli</code> terminale
+            <h4 style="margin: 0px">Prove to someone that you have sent them BitLitas in this transaction</h4>
+            <h5 style="margin: 0px">Tx private key can be obtained using <code>get_tx_key</code>
+                command in  <code>bitlitas-wallet-cli</code> command line tool
 				<br/><br/>
-                <strong>Pastaba: adresas ir privatus tx raktas yra siunčiamas į serverį, kuriame vyksta duomenų apdorojimas</strong>
+                <strong>Note: address and tx private key are sent to the server, as the calculations are done on the server side</strong>
 			</h5>
             <form action="/prove" method="get" style="max-width: 900px; margin: auto; text-align: center;" autocomplete="off">
                <input type="hidden" name="txhash" value="{{tx_hash}}"><br/>
               <div class="form-group">
-                <input type="text" class="form-control" id="inputTxPrivateKey" placeholder="Tx privatus raktas" name="txprvkey"/>
+                <input type="text" class="form-control" id="inputTxPrivateKey" placeholder="Tx private key" name="txprvkey"/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" id="inputRecipientBitlitasAddress" placeholder="Gavėjo adresas" name="litaddress"/>
+                <input type="text" class="form-control" id="inputRecipientBitlitasAddress" placeholder="Recipient's Address" name="litaddress"/>
               </div>
-              <button type="submit" class="btn btn-explorer">Patvirtinti</button>
+              <button type="submit" class="btn btn-explorer">Confirm</button>
             </form>
           </div>
         </div>
@@ -177,14 +177,14 @@
     <div class="panel panel-explorer">
         <div class="panel-heading">
 		  {{^inputs_lit_sum_not_zero}}
-			{{inputs_no}} pavedimas(-ai) IŠ. Viso {{inputs_lit_sum_short}} LIT
+			{{inputs_no}} input(s) for total of {{inputs_lit_sum_short}} LTL
 		  {{/inputs_lit_sum_not_zero}}
 		  {{#inputs_lit_sum_not_zero}}
 			{{^have_any_unknown_amount}}
-			  {{inputs_no}} pavedimas(-ai) IŠ. Viso {{inputs_lit_sum}} LIT
+			  {{inputs_no}} input(s) for total of {{inputs_lit_sum}} LTL
 			{{/have_any_unknown_amount}}
 			{{#have_any_unknown_amount}}
-			  {{inputs_no}} pavedimas(-ai) IŠ. Viso {{inputs_lit_sum}} LIT
+			  {{inputs_no}} input(s) for total of {{inputs_lit_sum}} LTL
 			{{/have_any_unknown_amount}}
 		  {{/inputs_lit_sum_not_zero}}
         </div>
@@ -194,9 +194,9 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th><span style="font-size:90%;font-weight:normal;">(spausk ant stulpelio norėdamas matyti daugiau)</span></th>
+                    <th><span style="font-size:90%;font-weight:normal;">(click on row to see more)</span></th>
 					{{#have_raw_tx}}
-					<th>Jau išsiųsta?</th>
+					<th>Already spent?</th>
 					{{/have_raw_tx}}
                     <th>Suma</th>
                   </tr>
@@ -232,15 +232,15 @@
                             <table class="table tx-mixins">
                               <thead>
                                 <tr>
-                                  <th>Mixin slaptas adresas</th>
+                                  <th>Mixin secret address</th>
 								  {{#have_raw_tx}}
 								  <th>Is it real?</th>
 								  {{/have_raw_tx}}
-                                  <th>blokas</th>
+                                  <th>block</th>
                                   <th>mixin</th>
-                                  <th>į/iš</th>
-                                  <th>data</th>
-                                  <th>prieš [y:d:h:m:s]</th>
+                                  <th>in/out</th>
+                                  <th>timestamp</th>
+                                  <th>age [y:d:h:m:s]</th>
                                 </tr>
                               </thead>
                               <tbody>
