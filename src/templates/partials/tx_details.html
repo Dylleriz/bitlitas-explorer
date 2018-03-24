@@ -1,5 +1,5 @@
 	 <div class="panel panel-explorer panel-tx">
-          <div class="panel-heading">Pavedimas</div>
+          <div class="panel-heading">Transaction</div>
 		  {{#blk_found}}
           <div class="row">
             <div class="col-xs-12 col-sm-2">Tx hash: </div>
@@ -7,49 +7,49 @@
           </div>
 		  {{/blk_found}}
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Tx viešas raktas: </div>
+            <div class="col-xs-12 col-sm-2">Tx publick key: </div>
             <div class="col-xs-12 col-sm-10">{{tx_pub_key}}</div>
           </div>
 		  
 		  {{#has_payment_id}}
 		  <div class="row">
-            <div class="col-xs-12 col-sm-2">Pavedimo ID: </div>
+            <div class="col-xs-12 col-sm-2">Transaction ID: </div>
             <div class="col-xs-12 col-sm-10">{{payment_id}}</div>
           </div>
 		  {{/has_payment_id}}
 		  
 		  {{#has_payment_id8}}
 		  <div class="row">
-            <div class="col-xs-12 col-sm-2">Pavedimo ID (encrypted): </div>
+            <div class="col-xs-12 col-sm-2">Transaction ID (encrypted): </div>
             <div class="col-xs-12 col-sm-10">{{payment_id8}}</div>
           </div>
 		  {{/has_payment_id8}}
 		  
 		  {{#have_prev_hash}}
 		  <div class="row">
-            <div class="col-xs-12 col-sm-2">Ankstesnis tx: </div>
+            <div class="col-xs-12 col-sm-2">Previous tx: </div>
             <div class="col-xs-12 col-sm-10">{{prev_hash}}</div>
           </div>
 		  {{/have_prev_hash}}
 		  
 		  {{#have_next_hash}}
 		  <div class="row">
-            <div class="col-xs-12 col-sm-2">Sekantis tx: </div>
+            <div class="col-xs-12 col-sm-2">Next tx: </div>
             <div class="col-xs-12 col-sm-10">{{next_hash}}</div>
           </div>
 		  {{/have_next_hash}}
 		  
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Blokas: </div>
+            <div class="col-xs-12 col-sm-2">Block: </div>
 			{{#blk_found}}
             <div class="col-xs-12 col-sm-10"><a href="/blokas/{{blk_height}}">{{blk_height}}</a></div>
 			{{/blk_found}}
 			{{^blk_found}}
-            <div class="col-xs-12 col-sm-10">N/A (tx vis dar vykdomas)</div>
+            <div class="col-xs-12 col-sm-10">N/A (tx still running)</div>
 			{{/blk_found}}
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Viso suma: </div>
+            <div class="col-xs-12 col-sm-2">Total: </div>
             <div class="col-xs-12 col-sm-10">{{{outputs_lit_sum}}}</div>
           </div>
 		  {{^have_raw_tx}}
@@ -58,7 +58,7 @@
             <!-- <div class="col-xs-12 col-sm-10">{{blk_timestamp_uint}}</div> -->
           <!-- </div> -->
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Laikas [UTC]: </div>
+            <div class="col-xs-12 col-sm-2">Time [UTC]: </div>
             <div class="col-xs-12 col-sm-10">{{blk_timestamp}}</div>
           </div>
           <!-- <div class="row"> -->
@@ -67,33 +67,33 @@
           <!-- </div> -->
 		  {{/have_raw_tx}}
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Mokestis: </div>
+            <div class="col-xs-12 col-sm-2">Fee: </div>
             <div class="col-xs-12 col-sm-10">{{tx_fee}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Tx dydis: </div>
+            <div class="col-xs-12 col-sm-2">Tx size: </div>
             <div class="col-xs-12 col-sm-10">{{tx_size}} Kb</div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Tx versija: </div>
+            <div class="col-xs-12 col-sm-2">Tx version: </div>
             <div class="col-xs-12 col-sm-10">{{tx_version}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Patvirtinimų skaičiu: </div>
+            <div class="col-xs-12 col-sm-2">No of confirmations: </div>
             <div class="col-xs-12 col-sm-10" id="tx-confirmations"> {{confirmations}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Žiedas: </div>
+            <div class="col-xs-12 col-sm-2">Ring: </div>
             <div class="col-xs-12 col-sm-10">{{#is_ringct}}taip/{{rct_type}}{{/is_ringct}}{{^is_ringct}}ne{{/is_ringct}}</div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-2">Papildomai: </div>
+            <div class="col-xs-12 col-sm-2">Extra: </div>
             <div class="col-xs-12 col-sm-10">{{extra}}</div>
           </div>
      </div>
 	 <div class="panel panel-explorer">
         <div class="panel-heading">
-          {{outputs_no}} pavedimas(-ai) Į
+          {{outputs_no}} transaction(-'s) Į
           
         </div>
         <div class="panel-body">
@@ -102,9 +102,9 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Slaptas adresas</th>
-                    <th>Suma</th>
-                    <th>Sumos indeksas</th>
+                    <th>Stealth address</th>
+                    <th>Ammount</th>
+                    <th>Ammount idx</th>
                   </tr>
                 </thead>
                 <tbody>
